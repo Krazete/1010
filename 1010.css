@@ -1,0 +1,79 @@
+body {
+	background: #1c1c1c;
+}
+body.grab {
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+body.grab .holder {
+	cursor: inherit;
+}
+body.grab .holder:hover .polyomino {
+	border-spacing: 1px;
+}
+body.grab .holder:hover .polyomino.grab {
+	border-spacing: 8px;
+}
+body.grab .polyomino .cell {
+	width: 20px;
+	height: 20px;
+}
+body.grab .polyomino.grab .cell {
+	width: 26px;
+	height: 26px;
+}
+
+.table {
+	border-spacing: 2px;
+	margin: auto;
+	display: table;
+}
+
+.row {
+	display: table-row;
+}
+
+.cell {
+	background: #363636;
+	width: 32px;
+	height: 32px;
+	border-radius: 4px;
+	display: table-cell;
+}
+.cell:after {
+	content: attr(data-value);
+}
+
+#dock {
+	text-align: center;
+	margin-top: 64px;
+}
+
+.holder {
+	cursor: move;
+	cursor: -webkit-grab;
+	width: 256px;
+	height: 256px;
+	display: inline-block;
+}
+.holder.empty {
+	cursor: inherit;
+}
+
+.polyomino {
+	border-spacing: 1px;
+	transition: 100ms border-spacing;
+}
+.holder:hover .polyomino, .polyomino.grab {
+	border-spacing: 8px;
+}
+
+.polyomino .cell {
+	width: 20px;
+	height: 20px;
+	transition: 100ms width, 100ms height;
+}
+.holder:hover .cell, .polyomino.grab .cell {
+	width: 26px;
+	height: 26px;
+}
