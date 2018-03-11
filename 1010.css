@@ -1,5 +1,6 @@
 body {
 	background: #1c1c1c;
+	user-select: none;
 }
 body.grab {
 	cursor: move;
@@ -35,6 +36,9 @@ body.grab .polyomino.grab .cell {
 
 .cell {
 	background: #363636;
+	font-family: Futura;
+	text-align: center;
+	vertical-align: middle;
 	width: 32px;
 	height: 32px;
 	border-radius: 4px;
