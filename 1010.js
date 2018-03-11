@@ -35,6 +35,36 @@ function withinElement(point, element) {
 	return withinX && withinY;
 }
 
+function clearLine() {
+	var board = document.getElementById("board");
+	var rowCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	for (var r = 0; r < board.children.length; r++) {
+		var cellCount = 0;
+		for (var c = 0; c < board.children[r].children.length; c++) {
+			var cell = board.children[r].children[c];
+			if (cell.style.background) {
+				rowCount[c] += 1;
+				cellCount += 1;
+			}
+		}
+		if (cellCount == 10) {
+			for (var c = 0; c < board.children[r].children.length; c++) {
+				var cell = board.children[r].children[c];
+				cell.style.background = "";
+			}
+		}
+	}
+	console.log(rowCount);
+	for (var r = 0; r < board.children.length; r++) {
+		for (var c = 0; c < board.children[r].children.length; c++) {
+			if (rowCount[c] == 10) {
+				var cell = board.children[r].children[c];
+				cell.style.background = "";
+			}
+		}
+	}
+}
+
 function stopGrab(mouse) {
 	window.removeEventListener("mousemove", grab);
 	window.removeEventListener("mouseup", stopGrab);
@@ -62,7 +92,11 @@ function stopGrab(mouse) {
 		}
 		target.parentElement.removeEventListener("mousedown", startGrab);
 		target.remove();
+		clearLine();
 		calc();
+		if (Array.from(document.getElementById("dock").children).every(e => !e.children[0])) {
+			newDock();
+		}
 	}
 	else {
 		target.parentElement.classList.remove("empty");
@@ -268,7 +302,12 @@ function calc() {
 	for (var r = 0; r < board.children.length; r++) {
 		for (var c = 0; c < board.children[r].children.length; c++) {
 			var cell = board.children[r].children[c];
-			cell.dataset.value = 9;
+			if (cell.style.background) {
+				cell.dataset.value = "";
+			}
+			else {
+				cell.dataset.value = 9;
+			}
 		}
 	}
 }
